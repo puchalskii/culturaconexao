@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Festival Virtual - Cultura em Conexão</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(45deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 12s ease infinite;
+      color: white;
+      scroll-behavior: smooth;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Partículas flutuantes estilo campo */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      animation: floatField 8s ease-in-out infinite;
+    }
+
+    .particle:nth-child(1) { width: 6px; height: 6px; top: 10%; left: 15%; animation-delay: 0s; }
+    .particle:nth-child(2) { width: 10px; height: 10px; top: 70%; left: 85%; animation-delay: 3s; }
+    .particle:nth-child(3) { width: 4px; height: 4px; top: 50%; left: 75%; animation-delay: 6s; }
+    .particle:nth-child(4) { width: 8px; height: 8px; top: 90%; left: 25%; animation-delay: 2s; }
+    .particle:nth-child(5) { width: 12px; height: 12px; top: 20%; left: 60%; animation-delay: 4s; }
+    .particle:nth-child(6) { width: 5px; height: 5px; top: 40%; left: 10%; animation-delay: 1s; }
+
+    @keyframes floatField {
+      0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0.4; }
+      25% { transform: translateY(-15px) translateX(10px) rotate(90deg); opacity: 0.8; }
+      50% { transform: translateY(-25px) translateX(-5px) rotate(180deg); opacity: 1; }
+      75% { transform: translateY(-10px) translateX(-15px) rotate(270deg); opacity: 0.6; }
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 2rem 1rem;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-weight: 800;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin: 0;
+      line-height: 1.2;
+      background: linear-gradient(45deg, #fff, #f8f9fa, #fff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+      animation: textGlow 4s ease-in-out infinite alternate;
+      letter-spacing: -1px;
+    }
+
+    @keyframes textGlow {
+      from { text-shadow: 0 0 30px rgba(255, 255, 255, 0.5); }
+      to { text-shadow: 0 0 50px rgba(255, 255, 255, 0.8), 0 0 70px rgba(255, 255, 255, 0.4); }
+    }
+
+    header p {
+      margin: 1rem 0 0;
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      opacity: 0.9;
+      animation: fadeInUp 1s ease 0.5s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 0.9;
+        transform: translateY(0);
+      }
+    }
+
+    nav {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 0;
+      padding: 1rem 0;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav ul li a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s;
+    }
+
+    nav ul li a:hover::before {
+      left: 100%;
+    }
+
+    nav ul li a:hover,
+    nav ul li a:focus {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      outline: none;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    h2 {
+      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: white;
+      margin-bottom: 2rem;
+      text-align: center;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      animation: slideInFromLeft 0.8s ease both;
+    }
+
+    h2::before {
+      content: attr(data-emoji) " ";
+      font-size: 2.5rem;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    }
+
+    @keyframes slideInFromLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border-radius: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      padding: 2.5rem;
+      margin: 3rem 0;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInScale 0.8s ease both;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+      border-radius: 25px;
+      z-index: -1;
+      animation: borderGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes borderGlow {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .card:hover {
+      transform: translateY(-15px) scale(1.02);
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        0 0 50px rgba(255, 255, 255, 0.1);
+    }
+
+    section:nth-child(even) .card {
+      animation-delay: 0.2s;
+    }
+
+    section:nth-child(odd) .card {
+      animation-delay: 0.4s;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 1.5rem;
+    }
+
+    iframe, video {
+      border-radius: 20px;
+      width: 100%;
+      height: 350px;
+      margin-top: 1.5rem;
+      outline: none;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 1.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      padding: 1rem 2rem;
+      border-radius: 25px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+      font-size: 1.1rem;
+    }
+
+    a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s;
+    }
+
+    a:hover::before {
+      left: 100%;
+    }
+
+    a:hover,
+    a:focus {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      outline: none;
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+      font-weight: 600;
+      margin-top: 4rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        padding: 0 1rem;
+      }
+      
+      .card {
+        padding: 2rem 1.5rem;
+        margin: 2rem 0;
+      }
+      
+      iframe, video {
+        height: 250px;
+      }
+      
+      nav ul {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem 0;
+      }
+      
+      nav ul li a {
+        padding: 1rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1.5rem 1rem;
+      }
+      
+      .card {
+        padding: 1.5rem 1rem;
+      }
+      
+      iframe, video {
+        height: 200px;
+      }
+    }
+
+    /* Animações de entrada sequencial */
+    section:nth-child(1) { animation-delay: 0.1s; }
+    section:nth-child(2) { animation-delay: 0.3s; }
+    section:nth-child(3) { animation-delay: 0.5s; }
+    section:nth-child(4) { animation-delay: 0.7s; }
+  </style>
+</head>
+<body>
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <header>
+    <h1>CIDADE</h1>
+    <p>Festival Virtual - Cultura em Conexão</p>
+  </header>
+
+  <nav aria-label="Menu principal">
+    <ul>
+      <li><a href="#musica">🎵 Música</a></li>
+      <li><a href="#danca">💃 Dança</a></li>
+      <li><a href="#comida">🍲 Receitas</a></li>
+      <li><a href="#artesanato">🧵 Artesanato</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="musica" tabindex="-1">
+      <h2 data-emoji="🎼">Música</h2>
+      <div class="card">
+        <iframe 
+          src="https://www.youtube.com/embed/Vgy_huoO3EE?si=YtnBQnqsmr-h9yAb" 
+          title="Vídeo música Paraná"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+        <p>Ritmos que conectam o Paraná, ecoando das raízes do campo aos horizontes urbanos.</p>
+      </div>
+    </section>
+
+    <section id="danca" tabindex="-1">
+      <h2 data-emoji="🕺">Dança</h2>
+      <div class="card">
+        <iframe
+          src="https://www.youtube.com/embed/i8NT_Dl8ajI?si=8ziMkSsQrxfrrrkv"
+          title="Vídeo Dança"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+        <p>Do forró ao hip-hop: corpos em movimento contam histórias de tradição e modernidade.</p>
+      </div>
+    </section>
+
+    <section id="comida" tabindex="-1">
+      <h2 data-emoji="🍛">Receitas</h2>
+      <div class="card">
+        <p>Sabores autênticos que nascem da terra e florescem na mesa, unindo gerações através do paladar.</p>
+        <a href="https://maispinhais.com.br/wp-content/uploads/2018/04/livro_delicias_do_parana.pdf" target="_blank" download>
+          🌾 Baixar Livro de Receitas do Campo
+        </a>
+      </div>
+    </section>
+
+    <section id="artesanato" tabindex="-1">
+      <h2 data-emoji="🧶">Artesanato</h2>
+      <div class="card">
+        <p>Tradição, criatividade e mãos que constroem cultura, tecendo histórias entre fios e cores.</p>
+        <a href="https://revistaunquiet.com.br/wp-content/uploads/2023/12/Guia-do-Artesanato-Brasileiro.pdf" target="_blank" download>
+          🎨 Baixar Guia de Artesanato Brasileiro
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Festival Cultura em Conexão - Raízes e Horizontes</p>
+  </footer>
+</body>
+</html>
