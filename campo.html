@@ -22,6 +22,32 @@
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
+      transition: all 0.3s ease;
+    }
+
+    /* Modo Alto Contraste */
+    body.high-contrast {
+      background: #000000;
+      color: #ffffff;
+    }
+    
+    body.high-contrast .card {
+      background: #333333;
+      border: 2px solid #ffffff;
+    }
+    
+    body.high-contrast nav ul li a {
+      background: #333333;
+      border: 2px solid #ffffff;
+    }
+
+    /* Fonte Grande */
+    body.large-font {
+      font-size: 1.2em;
+    }
+    
+    body.large-font p {
+      font-size: 1.4rem;
     }
 
     @keyframes gradientShift {
@@ -39,6 +65,12 @@
       height: 100%;
       pointer-events: none;
       z-index: 1;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    body.reduced-motion .particles {
+      opacity: 0;
     }
 
     .particle {
@@ -46,6 +78,10 @@
       background: rgba(255, 255, 255, 0.4);
       border-radius: 50%;
       animation: floatField 8s ease-in-out infinite;
+    }
+
+    body.reduced-motion .particle {
+      animation: none;
     }
 
     .particle:nth-child(1) { width: 6px; height: 6px; top: 10%; left: 15%; animation-delay: 0s; }
@@ -62,6 +98,118 @@
       75% { transform: translateY(-10px) translateX(-15px) rotate(270deg); opacity: 0.6; }
     }
 
+    /* Botão de Voltar */
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+    }
+
+    .back-button:hover,
+    .back-button:focus {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      outline: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* Painel de Acessibilidade */
+    .accessibility-panel {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 15px;
+      padding: 20px;
+      z-index: 1000;
+      min-width: 250px;
+      transform: translateX(calc(100% + 20px));
+      transition: transform 0.3s ease;
+    }
+
+    .accessibility-panel.active {
+      transform: translateX(0);
+    }
+
+    .accessibility-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1001;
+      transition: all 0.3s ease;
+      font-size: 20px;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .accessibility-toggle:hover,
+    .accessibility-toggle:focus {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
+      outline: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .accessibility-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      transition: background 0.2s ease;
+    }
+
+    .accessibility-option:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .accessibility-option label {
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .accessibility-option input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .panel-title {
+      color: white;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 16px;
+    }
+
     header {
       background: rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(20px);
@@ -71,6 +219,7 @@
       position: relative;
       z-index: 10;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      margin-top: 60px;
     }
 
     header h1 {
@@ -87,6 +236,10 @@
       letter-spacing: -1px;
     }
 
+    body.reduced-motion header h1 {
+      animation: none;
+    }
+
     @keyframes textGlow {
       from { text-shadow: 0 0 30px rgba(255, 255, 255, 0.5); }
       to { text-shadow: 0 0 50px rgba(255, 255, 255, 0.8), 0 0 70px rgba(255, 255, 255, 0.4); }
@@ -99,6 +252,11 @@
       font-size: clamp(1rem, 2.5vw, 1.3rem);
       opacity: 0.9;
       animation: fadeInUp 1s ease 0.5s both;
+    }
+
+    body.reduced-motion header p {
+      animation: none;
+      opacity: 0.9;
     }
 
     @keyframes fadeInUp {
@@ -170,6 +328,11 @@
       outline: none;
     }
 
+    body.reduced-motion nav ul li a:hover,
+    body.reduced-motion nav ul li a:focus {
+      transform: none;
+    }
+
     main {
       max-width: 1000px;
       margin: 4rem auto;
@@ -186,6 +349,10 @@
       text-align: center;
       text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
       animation: slideInFromLeft 0.8s ease both;
+    }
+
+    body.reduced-motion h2 {
+      animation: none;
     }
 
     h2::before {
@@ -223,6 +390,10 @@
       animation: fadeInScale 0.8s ease both;
     }
 
+    body.reduced-motion .card {
+      animation: none;
+    }
+
     .card::before {
       content: '';
       position: absolute;
@@ -234,6 +405,10 @@
       border-radius: 25px;
       z-index: -1;
       animation: borderGlow 3s ease-in-out infinite;
+    }
+
+    body.reduced-motion .card::before {
+      animation: none;
     }
 
     @keyframes borderGlow {
@@ -260,6 +435,10 @@
         0 30px 60px rgba(0, 0, 0, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.3),
         0 0 50px rgba(255, 255, 255, 0.1);
+    }
+
+    body.reduced-motion .card:hover {
+      transform: none;
     }
 
     section:nth-child(even) .card {
@@ -329,6 +508,11 @@
       outline: none;
     }
 
+    body.reduced-motion a:hover,
+    body.reduced-motion a:focus {
+      transform: none;
+    }
+
     footer {
       background: rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(20px);
@@ -342,7 +526,51 @@
       z-index: 10;
     }
 
+    /* Skip Link */
+    .skip-link {
+      position: fixed;
+      top: -40px;
+      left: 20px;
+      background: #000;
+      color: #fff;
+      padding: 8px 16px;
+      text-decoration: none;
+      border-radius: 4px;
+      z-index: 10000;
+      transition: all 0.3s ease;
+    }
+
+    .skip-link:focus {
+      top: 20px;
+    }
+
     @media (max-width: 768px) {
+      .back-button {
+        top: 10px;
+        left: 10px;
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+
+      .accessibility-toggle {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+
+      .accessibility-panel {
+        top: 10px;
+        right: 10px;
+        min-width: 200px;
+        padding: 15px;
+      }
+
+      header {
+        margin-top: 50px;
+      }
+
       main {
         padding: 0 1rem;
       }
@@ -386,9 +614,68 @@
     section:nth-child(2) { animation-delay: 0.3s; }
     section:nth-child(3) { animation-delay: 0.5s; }
     section:nth-child(4) { animation-delay: 0.7s; }
+
+    /* Focus visível para acessibilidade */
+    *:focus {
+      outline: 3px solid rgba(255, 255, 255, 0.8);
+      outline-offset: 2px;
+    }
+
+    /* Estilo para leitores de tela */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Animações reduzidas quando solicitado */
+    @media (prefers-reduced-motion: reduce) {
+      body, .card, .particle, header h1, .card::before {
+        animation: none !important;
+      }
+      
+      .card:hover, a:hover, nav ul li a:hover {
+        transform: none !important;
+      }
+    }
   </style>
 </head>
 <body>
+
+  
+  <a href="javascript:history.back()" class="back-button" aria-label="Voltar à página anterior">
+    ← Voltar
+  </a>
+
+  <button class="accessibility-toggle" aria-label="Abrir opções de acessibilidade" onclick="toggleAccessibilityPanel()">
+    ♿
+  </button>
+
+  <div class="accessibility-panel" id="accessibilityPanel" role="dialog" aria-labelledby="panel-title">
+    <h3 class="panel-title" id="panel-title">Opções de Acessibilidade</h3>
+    
+    <div class="accessibility-option">
+      <label for="highContrast">Alto Contraste</label>
+      <input type="checkbox" id="highContrast" onchange="toggleHighContrast()">
+    </div>
+    
+    <div class="accessibility-option">
+      <label for="largeFont">Fonte Grande</label>
+      <input type="checkbox" id="largeFont" onchange="toggleLargeFont()">
+    </div>
+    
+    <div class="accessibility-option">
+      <label for="reducedMotion">Reduzir Animações</label>
+      <input type="checkbox" id="reducedMotion" onchange="toggleReducedMotion()">
+    </div>
+  </div>
+
   <div class="particles">
     <div class="particle"></div>
     <div class="particle"></div>
@@ -405,16 +692,16 @@
 
   <nav aria-label="Menu principal">
     <ul>
-      <li><a href="#musica">🎵 Música</a></li>
-      <li><a href="#danca">💃 Dança</a></li>
-      <li><a href="#comida">🍲 Receitas</a></li>
-      <li><a href="#artesanato">🧵 Artesanato</a></li>
+      <li><a href="#musica">Música</a></li>
+      <li><a href="#danca">Dança</a></li>
+      <li><a href="#comida">Receitas</a></li>
+      <li><a href="#artesanato">Artesanato</a></li>
     </ul>
   </nav>
 
-  <main>
+  <main id="main">
     <section id="musica" tabindex="-1">
-      <h2 data-emoji="🎼">Música</h2>
+      <h2>Música</h2>
       <div class="card">
         <iframe 
           src="https://www.youtube.com/embed/qqu9UarfxmI?si=JI2s3zytpxd-KhjX"
@@ -423,47 +710,111 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen>
         </iframe>
-        <p>Ritmos que conectam o Paraná, ecoando das raízes do campo.</p>
+        <p>Ritmos que conectam o Paraná, ecoando às raízes do campo.</p>
       </div>
     </section>
 
     <section id="danca" tabindex="-1">
-      <h2 data-emoji="🕺">Dança</h2>
+      <h2>Dança</h2>
       <div class="card">
         <iframe
-          src="https://www.youtube.com/embed/i8NT_Dl8ajI?si=8ziMkSsQrxfrrrkv"
-          title="Vídeo Dança"
+          src="https://www.youtube.com/embed/TXmeRSZXDpM?si=VzG1NdNv36h1CSOyK"
+          title="Dança Country"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
         ></iframe>
-        <p>Do forró ao hip-hop: corpos em movimento contam histórias de tradição e modernidade.</p>
+        <p>Do coutry ao hip-hop: corpos em movimento contam histórias de tradição.</p>
       </div>
     </section>
 
     <section id="comida" tabindex="-1">
-      <h2 data-emoji="🍛">Receitas</h2>
+      <h2>Receitas</h2>
       <div class="card">
         <p>Sabores autênticos que nascem da terra e florescem na mesa, unindo gerações através do paladar.</p>
-        <a href="https://maispinhais.com.br/wp-content/uploads/2018/04/livro_delicias_do_parana.pdf" target="_blank" download>
-          🌾 Baixar Livro de Receitas do Campo
+        <a href="https://sistemafaeg.com.br/storage/arquivos/Livro-Receitas-para-site.pdf" target="_blank" download>
+          Baixar Livro de Receitas do Campo
         </a>
       </div>
     </section>
 
     <section id="artesanato" tabindex="-1">
-      <h2 data-emoji="🧶">Artesanato</h2>
+      <h2>Artesanato</h2>
       <div class="card">
         <p>Tradição, criatividade e mãos que constroem cultura, tecendo histórias entre fios e cores.</p>
-        <a href="https://revistaunquiet.com.br/wp-content/uploads/2023/12/Guia-do-Artesanato-Brasileiro.pdf" target="_blank" download>
-          🎨 Baixar Guia de Artesanato Brasileiro
+        <a href="https://drive.google.com/file/d/1BgsKnmSluv18Browb2g4yhsLQLZhojLZ/preview" target="_blank" download>
+          Baixar Guia de Artesanato 
         </a>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Festival Cultura em Conexão - Raízes e Horizontes</p>
+    <p>&copy; 2025 Festival Virtual - Cultura em Conexão</p>
   </footer>
+
+  <script>
+    // Funções de Acessibilidade
+    function toggleAccessibilityPanel() {
+      const panel = document.getElementById('accessibilityPanel');
+      panel.classList.toggle('active');
+    }
+
+    function toggleHighContrast() {
+      document.body.classList.toggle('high-contrast');
+      localStorage.setItem('highContrast', document.body.classList.contains('high-contrast'));
+    }
+
+    function toggleLargeFont() {
+      document.body.classList.toggle('large-font');
+      localStorage.setItem('largeFont', document.body.classList.contains('large-font'));
+    }
+
+    function toggleReducedMotion() {
+      document.body.classList.toggle('reduced-motion');
+      localStorage.setItem('reducedMotion', document.body.classList.contains('reduced-motion'));
+    }
+
+    // Carregar preferências salvas
+    window.addEventListener('load', function() {
+      if (localStorage.getItem('highContrast') === 'true') {
+        document.body.classList.add('high-contrast');
+        document.getElementById('highContrast').checked = true;
+      }
+      
+      if (localStorage.getItem('largeFont') === 'true') {
+        document.body.classList.add('large-font');
+        document.getElementById('largeFont').checked = true;
+      }
+      
+      if (localStorage.getItem('reducedMotion') === 'true') {
+        document.body.classList.add('reduced-motion');
+        document.getElementById('reducedMotion').checked = true;
+      }
+    });
+
+    // Fechar painel ao clicar fora
+    document.addEventListener('click', function(event) {
+      const panel = document.getElementById('accessibilityPanel');
+      const toggle = document.querySelector('.accessibility-toggle');
+      
+      if (!panel.contains(event.target) && !toggle.contains(event.target)) {
+        panel.classList.remove('active');
+      }
+    });
+
+    // Navegação por teclado
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        document.getElementById('accessibilityPanel').classList.remove('active');
+      }
+    });
+
+    // Detecção de preferência do sistema para movimento reduzido
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.body.classList.add('reduced-motion');
+      document.getElementById('reducedMotion').checked = true;
+    }
+  </script>
 </body>
 </html>

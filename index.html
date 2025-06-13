@@ -25,12 +25,144 @@
       color: white;
       overflow: hidden;
       position: relative;
+      transition: all 0.3s ease;
+    }
+
+    /* Modo Alto Contraste */
+    body.high-contrast {
+      background: #000000;
+      color: #ffffff;
+    }
+    
+    body.high-contrast .option {
+      background: #333333;
+      border: 2px solid #ffffff;
+    }
+
+    body.high-contrast .accessibility-panel {
+      background: #000000;
+      border: 2px solid #ffffff;
+    }
+
+    body.high-contrast .accessibility-toggle {
+      background: #333333;
+      border: 2px solid #ffffff;
+    }
+
+    /* Fonte Grande */
+    body.large-font {
+      font-size: 1.2em;
+    }
+    
+    body.large-font h2 {
+      font-size: clamp(1.4rem, 3.6vw, 2.2rem);
     }
 
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
+    }
+
+    body.reduced-motion {
+      animation: none !important;
+    }
+
+    body.reduced-motion * {
+      animation: none !important;
+      transition: none !important;
+    }
+
+    body.reduced-motion .option:hover {
+      transform: none !important;
+    }
+
+    /* Painel de Acessibilidade */
+    .accessibility-panel {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 15px;
+      padding: 20px;
+      z-index: 1000;
+      min-width: 250px;
+      transform: translateX(calc(100% + 20px));
+      transition: transform 0.3s ease;
+    }
+
+    .accessibility-panel.active {
+      transform: translateX(0);
+    }
+
+    .accessibility-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1001;
+      transition: all 0.3s ease;
+      font-size: 20px;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .accessibility-toggle:hover,
+    .accessibility-toggle:focus {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
+      outline: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    body.reduced-motion .accessibility-toggle:hover,
+    body.reduced-motion .accessibility-toggle:focus {
+      transform: none;
+    }
+
+    .accessibility-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      transition: background 0.2s ease;
+    }
+
+    .accessibility-option:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .accessibility-option label {
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .accessibility-option input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .panel-title {
+      color: white;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 16px;
     }
 
     /* Partículas flutuantes */
@@ -42,6 +174,12 @@
       height: 100%;
       pointer-events: none;
       z-index: 1;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    body.reduced-motion .particles {
+      opacity: 0;
     }
 
     .particle {
@@ -49,6 +187,10 @@
       background: rgba(255, 255, 255, 0.6);
       border-radius: 50%;
       animation: float 6s ease-in-out infinite;
+    }
+
+    body.reduced-motion .particle {
+      animation: none;
     }
 
     .particle:nth-child(1) { width: 8px; height: 8px; top: 20%; left: 10%; animation-delay: 0s; }
@@ -83,6 +225,10 @@
       letter-spacing: -2px;
     }
 
+    body.reduced-motion h1 {
+      animation: none;
+    }
+
     @keyframes textGlow {
       from { text-shadow: 0 0 30px rgba(255, 255, 255, 0.5); }
       to { text-shadow: 0 0 50px rgba(255, 255, 255, 0.8), 0 0 70px rgba(255, 255, 255, 0.4); }
@@ -98,6 +244,11 @@
       margin-left: auto;
       margin-right: auto;
       animation: fadeInUp 1s ease 0.5s both;
+    }
+
+    body.reduced-motion h2 {
+      animation: none;
+      opacity: 0.95;
     }
 
     @keyframes fadeInUp {
@@ -117,6 +268,10 @@
       justify-content: center;
       flex-wrap: wrap;
       animation: fadeInUp 1s ease 1s both;
+    }
+
+    body.reduced-motion .buttons {
+      animation: none;
     }
 
     .option {
@@ -140,6 +295,10 @@
       min-width: 200px;
     }
 
+    body.reduced-motion .option {
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
     .option::before {
       content: '';
       position: absolute;
@@ -149,6 +308,10 @@
       height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
       transition: left 0.6s;
+    }
+
+    body.reduced-motion .option::before {
+      display: none;
     }
 
     .option:hover::before {
@@ -165,8 +328,18 @@
         0 0 50px rgba(255, 255, 255, 0.1);
     }
 
+    body.reduced-motion .option:hover {
+      transform: none;
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
     .option:active {
       transform: translateY(-5px) scale(1.02);
+    }
+
+    body.reduced-motion .option:active {
+      transform: none;
     }
 
     /* Efeito de conexão entre os botões */
@@ -182,13 +355,70 @@
       animation: pulse 2s ease-in-out infinite;
     }
 
+    body.reduced-motion .connection-line {
+      animation: none;
+      opacity: 0.4;
+    }
+
     @keyframes pulse {
       0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(-50%) scaleX(1); }
       50% { opacity: 0.8; transform: translateX(-50%) translateY(-50%) scaleX(1.2); }
     }
 
+    /* Focus visível para acessibilidade */
+    *:focus {
+      outline: 3px solid rgba(255, 255, 255, 0.8);
+      outline-offset: 2px;
+    }
+
+    /* Estilo para leitores de tela */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Skip Link */
+    .skip-link {
+      position: fixed;
+      top: -40px;
+      left: 20px;
+      background: #000;
+      color: #fff;
+      padding: 8px 16px;
+      text-decoration: none;
+      border-radius: 4px;
+      z-index: 10000;
+      transition: all 0.3s ease;
+    }
+
+    .skip-link:focus {
+      top: 20px;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
+      .accessibility-toggle {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+
+      .accessibility-panel {
+        top: 10px;
+        right: 10px;
+        min-width: 200px;
+        padding: 15px;
+      }
+
       .buttons {
         gap: 2rem;
         flex-direction: column;
@@ -234,6 +464,10 @@
       animation: fadeInDown 1s ease both;
     }
 
+    body.reduced-motion h1 {
+      animation: none;
+    }
+
     @keyframes fadeInDown {
       from {
         opacity: 0;
@@ -244,9 +478,44 @@
         transform: translateY(0);
       }
     }
+
+    /* Animações reduzidas quando solicitado */
+    @media (prefers-reduced-motion: reduce) {
+      body, .particle, h1, h2, .buttons, .connection-line {
+        animation: none !important;
+      }
+      
+      .option:hover, .accessibility-toggle:hover {
+        transform: none !important;
+      }
+    }
   </style>
 </head>
 <body>
+
+  <button class="accessibility-toggle" aria-label="Abrir opções de acessibilidade" onclick="toggleAccessibilityPanel()">
+    ♿
+  </button>
+
+  <div class="accessibility-panel" id="accessibilityPanel" role="dialog" aria-labelledby="panel-title">
+    <h3 class="panel-title" id="panel-title">Opções de Acessibilidade</h3>
+    
+    <div class="accessibility-option">
+      <label for="highContrast">Alto Contraste</label>
+      <input type="checkbox" id="highContrast" onchange="toggleHighContrast()">
+    </div>
+    
+    <div class="accessibility-option">
+      <label for="largeFont">Fonte Grande</label>
+      <input type="checkbox" id="largeFont" onchange="toggleLargeFont()">
+    </div>
+    
+    <div class="accessibility-option">
+      <label for="reducedMotion">Reduzir Animações</label>
+      <input type="checkbox" id="reducedMotion" onchange="toggleReducedMotion()">
+    </div>
+  </div>
+
   <div class="particles">
     <div class="particle"></div>
     <div class="particle"></div>
@@ -255,14 +524,83 @@
     <div class="particle"></div>
   </div>
   
-  <div class="container">
+  <div class="container" id="main">
     <h1>CULTURA EM CONEXÃO</h1>
     <h2>Vivencie o encontro autêntico da cultura paranaense: sons, danças, artesanato e sabores do campo e da cidade</h2>
     <div class="buttons">
-      <a class="option" href="cidade.html">🌆 Cidade</a>
-      <div class="connection-line"></div>
-      <a class="option" href="campo.html">🌾 Campo</a>
+      <a class="option" href="cidade.html" role="button" aria-describedby="cidade-desc">Cidade</a>
+      <div class="connection-line" aria-hidden="true"></div>
+      <a class="option" href="campo.html" role="button" aria-describedby="campo-desc">Campo</a>
+    </div>
+    
+    <div class="sr-only">
+      <div id="cidade-desc">Explore a cultura urbana paranaense com música, dança, receitas e artesanato</div>
+      <div id="campo-desc">Descubra as tradições rurais do Paraná com suas manifestações culturais</div>
     </div>
   </div>
+
+  <script>
+    // Funções de Acessibilidade
+    function toggleAccessibilityPanel() {
+      const panel = document.getElementById('accessibilityPanel');
+      panel.classList.toggle('active');
+    }
+
+    function toggleHighContrast() {
+      document.body.classList.toggle('high-contrast');
+      localStorage.setItem('highContrast', document.body.classList.contains('high-contrast'));
+    }
+
+    function toggleLargeFont() {
+      document.body.classList.toggle('large-font');
+      localStorage.setItem('largeFont', document.body.classList.contains('large-font'));
+    }
+
+    function toggleReducedMotion() {
+      document.body.classList.toggle('reduced-motion');
+      localStorage.setItem('reducedMotion', document.body.classList.contains('reduced-motion'));
+    }
+
+    // Carregar preferências salvas
+    window.addEventListener('load', function() {
+      if (localStorage.getItem('highContrast') === 'true') {
+        document.body.classList.add('high-contrast');
+        document.getElementById('highContrast').checked = true;
+      }
+      
+      if (localStorage.getItem('largeFont') === 'true') {
+        document.body.classList.add('large-font');
+        document.getElementById('largeFont').checked = true;
+      }
+      
+      if (localStorage.getItem('reducedMotion') === 'true') {
+        document.body.classList.add('reduced-motion');
+        document.getElementById('reducedMotion').checked = true;
+      }
+    });
+
+    // Fechar painel ao clicar fora
+    document.addEventListener('click', function(event) {
+      const panel = document.getElementById('accessibilityPanel');
+      const toggle = document.querySelector('.accessibility-toggle');
+      
+      if (!panel.contains(event.target) && !toggle.contains(event.target)) {
+        panel.classList.remove('active');
+      }
+    });
+
+    // Navegação por teclado
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        document.getElementById('accessibilityPanel').classList.remove('active');
+      }
+    });
+
+    // Detecção de preferência do sistema para movimento reduzido
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.body.classList.add('reduced-motion');
+      document.getElementById('reducedMotion').checked = true;
+    }
+  </script>
 </body>
 </html>
